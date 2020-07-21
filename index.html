@@ -5,27 +5,13 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>onlineretailers</title>
     <!-- iphone5下边 1rem = 16px  html的默认font-size是16px -->
-    <style>
-     .test{
-       width: 20rem;
-       height: 16rem;
-       background-color: bisque;
-       text-align: center;
-     }
-     .hello{
-       color: red;
-     }
-    </style>
   </head>
   <body>
     <div id="app"></div>
-    <!-- built files will be auto injected -->
-    <div class="test">
-      <p class="hello">hello jspang</p>
-    </div>
     <script>
       let htmlWidth = document.documentElement.clientWidth || document.body.clientWidth; // 得到屏幕的大小
       let htmlDom = document.getElementsByTagName('html')[0]; // 得到html的Dom元素
+      if(htmlWidth>750){htmlWidth=750} // 当页面很大的时候 文字不至于那么大
       htmlDom.style.fontSize = htmlWidth/20 + 'px'; // (ip5 320/20 = 16)
     </script>
   </body>
