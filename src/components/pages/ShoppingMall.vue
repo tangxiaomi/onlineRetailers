@@ -80,6 +80,7 @@
   import floorComponent from '../component/floorComponent'
   import goodsInfo from '../component/goodsInfoComponent'
   import { toMoney } from '@/filter/moneyFilter.js'
+  import url from '@/serviceAPI.config.js'
   export default {
     data() {
       return {
@@ -107,7 +108,7 @@
     components: {swiper, swiperSlide, swiperDefault, swiperDefaultVertical, swiperText, floorComponent, goodsInfo}, // 如何使用组件的示例
     created(){ // 在created中获取数据
       axios({
-        url: 'https://www.easy-mock.com/mock/5ae2eeb23fbbf24d8cd7f0b6/SmileVue/index', // 此链接有问题
+        url: url.getShoppingMallInfo, // 此链接有问题
         method: 'get',
       })
       .then(response => {
