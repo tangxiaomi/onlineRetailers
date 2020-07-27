@@ -50,6 +50,19 @@
     <floorComponent :floorData="floor1" :floorTitle="floorName.floor1"></floorComponent>
     <floorComponent :floorData="floor2" :floorTitle="floorName.floor2"></floorComponent>
     <floorComponent :floorData="floor3" :floorTitle="floorName.floor3"></floorComponent>
+    <!-- 热卖模块 -->
+    <div class="hot-area">
+        <div class="hot-title">热卖商品</div>
+        <div class="hot-goods">
+          <van-list>
+            <van-row gutter="20">
+              <van-col span='12' v-for="(item, index) in hotGoods" :key='index'>
+                <goods-info :goodsImage="item.image" :goodsName="item.name" :goodsPrice="item.price"></goods-info>
+              </van-col>
+            </van-row>
+          </van-list>
+        </div>
+    </div>
      <!-- swiper的使用 -->
     <!-- <swiperDefault></swiperDefault>
     <swiperDefaultVertical></swiperDefaultVertical>
@@ -65,6 +78,7 @@
   import swiperDefaultVertical from '../swiper/swiperDefaultVertical'
   import swiperText from '../swiper/swiperText'
   import floorComponent from '../component/floorComponent'
+  import goodsInfo from '../component/goodsInfoComponent'
   import { toMoney } from '@/filter/moneyFilter.js'
   export default {
     data() {
@@ -82,6 +96,7 @@
         floor2: [],
         floor3:[],
         floorName: {},
+        hotGoods: [],
       }
     },
     filters:{
@@ -89,7 +104,7 @@
         return toMoney(money); // toMoney是我们刚刚引入的 它的使用类似于pipe
       }
     },
-    components: {swiper, swiperSlide, swiperDefault, swiperDefaultVertical, swiperText, floorComponent}, // 如何使用组件的示例
+    components: {swiper, swiperSlide, swiperDefault, swiperDefaultVertical, swiperText, floorComponent, goodsInfo}, // 如何使用组件的示例
     created(){ // 在created中获取数据
       axios({
         url: 'https://www.easy-mock.com/mock/5ae2eeb23fbbf24d8cd7f0b6/SmileVue/index', // 此链接有问题
@@ -166,6 +181,128 @@
     }]
     
       this.adBanner = "http://images.baixingliangfan.cn/advertesPicture/20180404/20180404085441_850.gif";
+
+      this.hotGoods = [{
+      "mallPrice": 3.90,
+      "image": "http://images.baixingliangfan.cn/compressedPic/20180415120500_6504.jpg",
+      "goodsId": "fb0f913950944b66a97ae262ad14609a",
+      "price": 3.90,
+      "name": "美汁源果粒奶优水果饮料蜜桃450ml/瓶"
+    }, {
+      "mallPrice": 4.50,
+      "image": "http://images.baixingliangfan.cn/compressedPic/20180415115202_8432.jpg",
+      "goodsId": "775e575ce28a4f89b1dfe2c99eb08ae7",
+      "price": 4.50,
+      "name": "阿华田麦芽乳饮品牛奶味250mL/盒"
+    }, {
+      "mallPrice": 3.70,
+      "image": "http://images.baixingliangfan.cn/compressedPic/20180415121351_6470.jpg",
+      "goodsId": "e68d5293c0a04e99a3480aaaad101362",
+      "price": 3.70,
+      "name": "养元香浓六个核桃240ml/瓶"
+    }, {
+      "mallPrice": 6.50,
+      "image": "http://images.baixingliangfan.cn/compressedPic/20180415120956_8491.jpg",
+      "goodsId": "7c377350cc9342edba600f3f6a548bd0",
+      "price": 6.50,
+      "name": "名屋木瓜牛乳340ml/瓶"
+    }, {
+      "mallPrice": 3.90,
+      "image": "http://images.baixingliangfan.cn/compressedPic/20180415120411_5740.jpg",
+      "goodsId": "f8c3f62810aa4ce781d14a885333a2b8",
+      "price": 3.90,
+      "name": "美汁源果粒奶优草莓味450ml/瓶"
+    }, {
+      "mallPrice": 7.50,
+      "image": "http://images.baixingliangfan.cn/compressedPic/20180415120720_7233.jpg",
+      "goodsId": "85d4fece907a4170b4b27a22c035321d",
+      "price": 7.50,
+      "name": "名屋醇豆浆饮料485ml/瓶"
+    }, {
+      "mallPrice": 5.00,
+      "image": "http://images.baixingliangfan.cn/compressedPic/20180103161335_9324.jpg",
+      "goodsId": "9abd33f0d2e4496f9c023a1dcfbfe2ad",
+      "price": 6.30,
+      "name": "李子园甜牛奶乳饮料450ml/瓶"
+    }, {
+      "mallPrice": 5.00,
+      "image": "http://images.baixingliangfan.cn/compressedPic/20180415120239_7917.jpg",
+      "goodsId": "1258c2fd52844f679fad1ebf24764082",
+      "price": 5.00,
+      "name": "李子园草莓风味乳饮料450ml/瓶"
+    }, {
+      "mallPrice": 6.30,
+      "image": "http://images.baixingliangfan.cn/compressedPic/20171224082006_6602.jpg",
+      "goodsId": "bd25fd5d128e41fd9a737e99f75f92f8",
+      "price": 8.50,
+      "name": "娃哈哈AD钙奶220ml*4/条"
+    }, {
+      "mallPrice": 6.00,
+      "image": "http://images.baixingliangfan.cn/compressedPic/20180415121537_4372.jpg",
+      "goodsId": "cfbe6ec3101a414f9563a8c6624aec08",
+      "price": 6.00,
+      "name": "一榨鲜绿豆汁300ml/瓶"
+    }, {
+      "mallPrice": 5.00,
+      "image": "http://images.baixingliangfan.cn/compressedPic/20180415120109_275.jpg",
+      "goodsId": "e9808eb0d3574c11971e38f75076f1a4",
+      "price": 5.00,
+      "name": "李子园朱古力风味乳饮料450ml/瓶"
+    }, {
+      "mallPrice": 7.50,
+      "image": "http://images.baixingliangfan.cn/compressedPic/20180415120857_4885.jpg",
+      "goodsId": "a5d1130de39f434facc6d35514cea053",
+      "price": 7.50,
+      "name": "名屋黑豆浆饮料485ml/瓶"
+    }, {
+      "mallPrice": 4.50,
+      "image": "http://images.baixingliangfan.cn/compressedPic/20180415114959_7217.jpg",
+      "goodsId": "06130c91497b4806bf2b3e538814bb66",
+      "price": 4.50,
+      "name": "阿华田麦芽乳饮品高钙味250mL/盒"
+    }, {
+      "mallPrice": 6.50,
+      "image": "http://images.baixingliangfan.cn/compressedPic/20180415121108_2001.jpg",
+      "goodsId": "b75e437adc0540c6b30516537d759122",
+      "price": 6.50,
+      "name": "名屋香蕉牛乳340ml/瓶"
+    }, {
+      "mallPrice": 3.90,
+      "image": "http://images.baixingliangfan.cn/compressedPic/20180415120608_2319.jpg",
+      "goodsId": "0d51d2863bdc485688c2fee2a165bb51",
+      "price": 3.90,
+      "name": "美汁源果粒奶优原味450ml/瓶"
+    }, {
+      "mallPrice": 7.40,
+      "image": "http://images.baixingliangfan.cn/compressedPic/20171224082144_8430.jpg",
+      "goodsId": "85173b3ce7a24a44ac2ed960a3e431fc",
+      "price": 9.00,
+      "name": "旺仔牛奶125ml*4/条"
+    }, {
+      "mallPrice": 68.00,
+      "image": "http://images.baixingliangfan.cn/compressedPic/20180415122117_1031.jpg",
+      "goodsId": "99e37959ae22433da7bb378a2d24c19c",
+      "price": 68.00,
+      "name": "同福阿胶粥300g/箱"
+    }, {
+      "mallPrice": 3.50,
+      "image": "http://images.baixingliangfan.cn/compressedPic/20180415122256_2373.jpg",
+      "goodsId": "068fe09cf2a849b4b8c7ce3fea734072",
+      "price": 3.50,
+      "name": "银鹭桂圆莲子八宝粥360g/瓶"
+    }, {
+      "mallPrice": 14.50,
+      "image": "http://images.baixingliangfan.cn/compressedPic/20180415121432_880.jpg",
+      "goodsId": "8172961149434b51865612820c7b8891",
+      "price": 14.50,
+      "name": "椰树牌椰汁饮料1L/瓶"
+    }, {
+      "mallPrice": 4.50,
+      "image": "http://images.baixingliangfan.cn/compressedPic/20180415115515_7254.jpg",
+      "goodsId": "a870459dfbba4df8af52e52aa6d0c426",
+      "price": 4.50,
+      "name": "豆本豆原味豆奶250ml/盒"
+    }]
 
       this.bannerPicArray = [{
       "image": "http://images.baixingliangfan.cn/advertesPicture/20180407/20180407175040_1780.jpg",
@@ -512,5 +649,11 @@
     width: 99%;
     border-right: 1px solid #eee;
     text-align: center;
+  }
+  .hot-area{
+    text-align: center;
+    font-size:14px;
+    height: 1.8rem;
+    line-height:1.8rem;
   }
 </style>
