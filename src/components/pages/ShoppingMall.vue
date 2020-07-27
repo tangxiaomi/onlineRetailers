@@ -40,7 +40,7 @@
             <div class="recommend-item">
               <img :src="item.image" width="80%">
               <div>{{item.goodsName}}</div>
-              <div>￥{{item.price}}(￥{{item.mallPrice}})</div>
+              <div>￥{{item.price | moneyFilter}}(￥{{item.mallPrice | moneyFilter}})</div>
             </div>
           </swiper-slide>
         </swiper>
@@ -65,6 +65,7 @@
   import swiperDefaultVertical from '../swiper/swiperDefaultVertical'
   import swiperText from '../swiper/swiperText'
   import floorComponent from '../component/floorComponent'
+  import { toMoney } from '@/filter/moneyFilter.js'
   export default {
     data() {
       return {
@@ -81,6 +82,11 @@
         floor2: [],
         floor3:[],
         floorName: {},
+      }
+    },
+    filters:{
+      moneyFilter(money){
+        return toMoney(money); // toMoney是我们刚刚引入的 它的使用类似于pipe
       }
     },
     components: {swiper, swiperSlide, swiperDefault, swiperDefaultVertical, swiperText, floorComponent}, // 如何使用组件的示例
