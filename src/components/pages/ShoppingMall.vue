@@ -47,27 +47,9 @@
       </div>
       <div></div>
     </div>
-      
-     <div class="floor">
-       <div class="floor-anomaly">
-         <div class="floor-one">
-           <img :src="floor1_0.image" width = '100%'>
-         </div>
-         <div>
-          <div class="floor-two">
-            <img :src="floor1_1.image" width = '100%'>
-          </div>
-          <div>
-            <img :src="floor1_2.image" width = '100%'>
-          </div>
-         </div>
-       </div>
-       <div class="floor-rule">
-         <div v-for="(item, index) in floor1.slice(3)" :key="index">
-           <img :src="item.image" width="100%"/>
-         </div>
-       </div>
-     </div>
+    <floorComponent :floorData="floor1" :floorTitle="floorName.floor1"></floorComponent>
+    <floorComponent :floorData="floor2" :floorTitle="floorName.floor2"></floorComponent>
+    <floorComponent :floorData="floor3" :floorTitle="floorName.floor3"></floorComponent>
      <!-- swiper的使用 -->
     <!-- <swiperDefault></swiperDefault>
     <swiperDefaultVertical></swiperDefaultVertical>
@@ -82,6 +64,7 @@
   import swiperDefault from '../swiper/swiperDefault' // 这块是组件名和文件名是一样的呢~
   import swiperDefaultVertical from '../swiper/swiperDefaultVertical'
   import swiperText from '../swiper/swiperText'
+  import floorComponent from '../component/floorComponent'
   export default {
     data() {
       return {
@@ -95,12 +78,12 @@
         adBanner: '',
         recommendGoods:[],
         floor1: [],
-        floor1_0: {},
-        floor1_1: {},
-        floor1_2: {},
+        floor2: [],
+        floor3:[],
+        floorName: {},
       }
     },
-    components: {swiper, swiperSlide, swiperDefault, swiperDefaultVertical, swiperText}, // 如何使用组件的示例
+    components: {swiper, swiperSlide, swiperDefault, swiperDefaultVertical, swiperText, floorComponent}, // 如何使用组件的示例
     created(){ // 在created中获取数据
       axios({
         url: 'https://www.easy-mock.com/mock/5ae2eeb23fbbf24d8cd7f0b6/SmileVue/index', // 此链接有问题
@@ -112,6 +95,12 @@
       .catch((error) => {
 
       })
+
+      this.floorName = {
+      "floor3": "营养奶品",
+      "floor2": "新鲜水果",
+      "floor1": "休闲食品"
+    }
 
       this.floor1 = [{
       "goodsId": "e53c046465204d4fb8f22431cc2807e7",
@@ -130,9 +119,45 @@
       "image": "http://images.baixingliangfan.cn/homeFloor/20180407/20180407180427_8557.jpg"
     }]
 
-      this.floor1_0 = this.floor1[0],
-      this.floor1_1 = this.floor1[1],
-      this.floor1_2 = this.floor1[2],
+    this.floor2 = [{
+      "goodsId": "d0fabe0c966043cb8313fa55de9c555b",
+      "image": "http://images.baixingliangfan.cn/homeFloor/20180407/20180407180547_3253.jpg"
+    }, {
+      "goodsId": "36360da2ec084316a100c2df1c714e37",
+      "image": "http://images.baixingliangfan.cn/homeFloor/20180407/20180407180631_4071.jpg"
+    }, {
+      "goodsId": "eb47b495b65d42b8a1fc5823dcd5589c",
+      "image": "http://images.baixingliangfan.cn/homeFloor/20180407/20180407180705_7181.jpg"
+    }, {
+      "goodsId": "7f6e857e83b240508836717c8764a0b0",
+      "image": "http://images.baixingliangfan.cn/homeFloor/20180407/20180407180736_2822.jpg"
+    }, {
+      "goodsId": "c7cb656294ea48d3b224ddee5fdd9647",
+      "image": "http://images.baixingliangfan.cn/homeFloor/20180408/20180408081756_7181.jpg"
+    }, {
+      "goodsId": "7f6e857e83b240508836717c8764a0b0",
+      "image": "http://images.baixingliangfan.cn/homeFloor/20180407/20180407180736_2822.jpg"
+    }, {
+      "goodsId": "c7cb656294ea48d3b224ddee5fdd9647",
+      "image": "http://images.baixingliangfan.cn/homeFloor/20180408/20180408081756_7181.jpg"
+    }]
+
+    this.floor3 = [{
+      "goodsId": "ae4e71807a91460792670b657fa3ed3a",
+      "image": "http://images.baixingliangfan.cn/homeFloor/20180407/20180407181423_15.jpg"
+    }, {
+      "goodsId": "2a398a5048074fc3b36bc8026bf9dc65",
+      "image": "http://images.baixingliangfan.cn/homeFloor/20180407/20180407181216_8263.jpg"
+    }, {
+      "goodsId": "b37577ce45ee4cc6ba162959933dbac8",
+      "image": "http://images.baixingliangfan.cn/homeFloor/20180407/20180407181247_7554.jpg"
+    }, {
+      "goodsId": "43912e1f7b7842cab40fcdee9dbe8758",
+      "image": "http://images.baixingliangfan.cn/homeFloor/20180407/20180407181316_6196.jpg"
+    }, {
+      "goodsId": "98922617593e44c9a5880329a4cf0fd0",
+      "image": "http://images.baixingliangfan.cn/homeFloor/20180407/20180407181348_4054.jpg"
+    }]
     
       this.adBanner = "http://images.baixingliangfan.cn/advertesPicture/20180404/20180404085441_850.gif";
 
@@ -481,37 +506,5 @@
     width: 99%;
     border-right: 1px solid #eee;
     text-align: center;
-  }
-  .floor-anomaly{
-    display: flex;
-    flex-direction: row;
-    background-color: #fff;
-    border-bottom: 1px solid #ddd;
-  }
-  .floor-anomaly div{
-    width: 10rem;
-    box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-  }
-  .floor-one{
-    border-right: 1px solid #ddd;
-  }
-  .floor-two{
-    border-bottom: 1px solid #ddd;
-  }
-  .floor-rule{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    background-color: #fff;
-  }
-  .floor-rule div{
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    width: 10rem;
-    border-bottom: 1px solid #ddd;
-  }
-  .floor-rule div:nth-child(odd){
-    border-right: 1px solid #ddd;
   }
 </style>
