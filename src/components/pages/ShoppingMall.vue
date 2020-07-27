@@ -45,7 +45,33 @@
           </swiper-slide>
         </swiper>
       </div>
+      <div></div>
     </div>
+      
+     <div class="floor">
+       <div class="floor-anomaly">
+         <div class="floor-one">
+           <img :src="floor1_0.image" width = '100%'>
+         </div>
+         <div>
+          <div class="floor-two">
+            <img :src="floor1_1.image" width = '100%'>
+          </div>
+          <div>
+            <img :src="floor1_2.image" width = '100%'>
+          </div>
+         </div>
+       </div>
+       <div class="floor-rule">
+         <div v-for="(item, index) in floor1.slice(3)" :key="index">
+           <img :src="item.image" width="100%"/>
+         </div>
+       </div>
+     </div>
+     <!-- swiper的使用 -->
+    <!-- <swiperDefault></swiperDefault>
+    <swiperDefaultVertical></swiperDefaultVertical>
+    <swiperText></swiperText> -->
   </div>
 </template>
 
@@ -53,6 +79,9 @@
   import axios from 'axios' // 引入axios
   import 'swiper/dist/css/swiper.css'
   import { swiper, swiperSlide} from 'vue-awesome-swiper'
+  import swiperDefault from '../swiper/swiperDefault' // 这块是组件名和文件名是一样的呢~
+  import swiperDefaultVertical from '../swiper/swiperDefaultVertical'
+  import swiperText from '../swiper/swiperText'
   export default {
     data() {
       return {
@@ -64,10 +93,14 @@
         bannerPicArray:[],
         category: [],
         adBanner: '',
-        recommendGoods:[]
+        recommendGoods:[],
+        floor1: [],
+        floor1_0: {},
+        floor1_1: {},
+        floor1_2: {},
       }
     },
-    components: {swiper, swiperSlide}, // 如何使用组件的示例
+    components: {swiper, swiperSlide, swiperDefault, swiperDefaultVertical, swiperText}, // 如何使用组件的示例
     created(){ // 在created中获取数据
       axios({
         url: 'https://www.easy-mock.com/mock/5ae2eeb23fbbf24d8cd7f0b6/SmileVue/index', // 此链接有问题
@@ -79,6 +112,28 @@
       .catch((error) => {
 
       })
+
+      this.floor1 = [{
+      "goodsId": "e53c046465204d4fb8f22431cc2807e7",
+      "image": "http://images.baixingliangfan.cn/homeFloor/20180407/20180407180109_6316.jpg"
+    }, {
+      "goodsId": "f36f6dd8f62247d5846eaa9b3f269cbc",
+      "image": "http://images.baixingliangfan.cn/homeFloor/20180407/20180407180151_6180.jpg"
+    }, {
+      "goodsId": "72a3ec63956347a2a9f113589fe79c03",
+      "image": "http://images.baixingliangfan.cn/homeFloor/20180407/20180407180217_3970.jpg"
+    }, {
+      "goodsId": "a632bfb3818541da8e6843d6d0dbd917",
+      "image": "http://images.baixingliangfan.cn/homeFloor/20180407/20180407180257_2378.jpg"
+    }, {
+      "goodsId": "6694401a30a940f6ae437d541b7fd26d",
+      "image": "http://images.baixingliangfan.cn/homeFloor/20180407/20180407180427_8557.jpg"
+    }]
+
+      this.floor1_0 = this.floor1[0],
+      this.floor1_1 = this.floor1[1],
+      this.floor1_2 = this.floor1[2],
+    
       this.adBanner = "http://images.baixingliangfan.cn/advertesPicture/20180404/20180404085441_850.gif";
 
       this.bannerPicArray = [{
@@ -426,5 +481,37 @@
     width: 99%;
     border-right: 1px solid #eee;
     text-align: center;
+  }
+  .floor-anomaly{
+    display: flex;
+    flex-direction: row;
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+  }
+  .floor-anomaly div{
+    width: 10rem;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+  }
+  .floor-one{
+    border-right: 1px solid #ddd;
+  }
+  .floor-two{
+    border-bottom: 1px solid #ddd;
+  }
+  .floor-rule{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    background-color: #fff;
+  }
+  .floor-rule div{
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 10rem;
+    border-bottom: 1px solid #ddd;
+  }
+  .floor-rule div:nth-child(odd){
+    border-right: 1px solid #ddd;
   }
 </style>
