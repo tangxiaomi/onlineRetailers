@@ -2,7 +2,8 @@ const Koa = require('koa');
 const app = new Koa();
 const { connect, initSchemas } = required('./database/init.js');
 const mongoose = require('mongoose');
-
+const bodyParser = require('koa-bodyparser');
+const cors = require('koa2-cors'); // 解决跨域的中间件
 const Router = require('koa-router');
 let user = require('./aooApi/user.js');
 //装载所有子路由
@@ -10,8 +11,10 @@ let router = new Router();
 router.use('/user', user.routes())
 
 // 加载路由中间件
-app.use(router.routes())
+app.use(router.routes());
 app.use(router.allowedMethods());
+app.use(bodyParser);
+app.use(cors());
 
 
 

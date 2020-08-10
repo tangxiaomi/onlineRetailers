@@ -12,6 +12,8 @@ const userScheme = new Schema({
   password: String,
   createAt: {type: Date, default: Date.now()},
   lastLoginAt: {type: Date, default: Date.now()}
+},{
+  collection:'user' // 这在数据库中 这里的users就变成了user表
 })
 
 userScheme.pre('save', function(next){
@@ -27,4 +29,4 @@ userScheme.pre('save', function(next){
 })
 
 //发布模型
-mongoose.model('User', userScheme);
+mongoose.model('User', userScheme);  // 但是在数据库中 这里的user就变成了users表
