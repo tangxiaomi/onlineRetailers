@@ -28,5 +28,20 @@ userScheme.pre('save', function(next){
   })
 })
 
+// 使用静态方法 比对输入的密码是否正确
+userScheme.methods = {
+  comparePassword: (_password, password) => {
+    return new Promise((resolve, reject) => {
+      bcrypt.compare(_password, password, (err, isMatch) => {
+        if(!err){
+          resolve(isMatch)
+        } else {
+          reject(err);
+        }
+      })
+    })
+  }
+}
+
 //发布模型
 mongoose.model('User', userScheme);  // 但是在数据库中 这里的user就变成了users表

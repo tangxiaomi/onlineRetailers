@@ -27,3 +27,31 @@ router.post('/register', async(ctx) => {
   })
 })
 
+router.post('./login', async(ctx) => {
+  let loginUser = ctx.request.body;
+  let userName = loginUser.username;
+  let password = loginUser.password;
+
+  // 引入User中的model
+  const user = mongoose.model('User');
+  await User.findOne({userName}).exec().then((result) => {
+    console.log(result)
+    if(result){
+      //用户名存在的时候 再去比对密码 result.password这是数据库的变量
+      let newUser = new User();
+      await newUser.comparePassword(password, result.password)
+      .then(isMatch => {
+        ctx.body = {code: 200, messsage: isMatch}
+      })
+      .catch(error => {
+        ctx.body = {code: 500, messsage: error}
+      })
+    } else {
+      //用户名不存在的时候
+    }
+  }).catch(error => {
+    ctx.body={code: 500, message: error}
+  })
+})
+
+module.exports = routes;

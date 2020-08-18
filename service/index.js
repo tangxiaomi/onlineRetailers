@@ -10,6 +10,9 @@ let user = require('./aooApi/user.js');
 let router = new Router();
 router.use('/user', user.routes())
 
+let goods = require('./appApi/goods.js');
+router.use('/goods', goods.routes());
+
 // 加载路由中间件
 app.use(router.routes());
 app.use(router.allowedMethods());
