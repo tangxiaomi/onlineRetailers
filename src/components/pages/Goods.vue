@@ -34,7 +34,7 @@
 
     <div class="goods-bottom">
       <div>
-        <van-button size="large" type="primary">加入购物车</van-button>
+        <van-button size="large" type="primary" @click="addGoodsToCart">加入购物车</van-button>
       </div>
       <div>
         <van-button size="large" type="danger">直接购买</van-button>
@@ -49,16 +49,16 @@ import url from '@/serviceAPI.config.js'
 import { Toast } from 'vant' 
 import { toMoney } from '@/filter/moneyFilter.js'
   export default {
+   filters: {
+    moneyFilter(money) {
+    return toMoney(money)
+    }
+   },
     data() {
       return {
        goodsId: '',
        goodsInfo: {}, // 商品详细信息
       }
-    },
-    filter: {
-      moneyFilter(money) {
-       return toMoney(money)
-     }
     },
     created(){
       // 获取页面跳转的路由传递的参数
@@ -96,7 +96,27 @@ import { toMoney } from '@/filter/moneyFilter.js'
       onClickLeft(){
         //编程式路由
         this.$router.go(-1);
-      }
+      },
+      //增加商品到购物车
+      addGoodsToCart(){
+        let cartInfo = localStorage.cartInfo ? JSON.parse(localStorage.cartInfo) : [];
+        let isHaveGoods = cartInfo.find(cart => cart.goodsId === this.goodsId); // 如果有就返回第一个查找的信息 如果没有则返回undefined
+        if(!isHaveGoods){
+          let newGoodsInfo = {
+            goodsId: this.goodsInfo.goodsId,
+            name: this.goodsInfo.name,
+            price: this.goodsInfo.price,
+            image: this.goodsInfo.image,
+            count: 1
+          }
+          cartInfo.push(newGoodsInfo);
+          localStorage.cartInfo = JSON.stringify(cartInfo);
+          Toast.success('添加成功');
+        } else {
+           Toast.success('已有此商品');
+        }
+        this.$router.push({name: 'Cart'})
+      },
     }
   }
 </script>
