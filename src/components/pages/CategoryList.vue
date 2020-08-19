@@ -85,8 +85,8 @@
     mounted(){
       //能操作dom的只有在这个生命周期中 设置左侧导航栏撑满整个页面
       let winHeight = document.documentElement.clientHeight; // 窗口高度
-      document.getElementById('leftnav').style.height = winHeight - 46 + 'px';
-      document.getElementById('list-div').style.height = winHeight - 90 + 'px';
+      document.getElementById('leftnav').style.height = winHeight - 46 - 50 + 'px'; // 把头和底减去
+      document.getElementById('list-div').style.height = winHeight - 90 - 50 + 'px';
     },
     methods:{
       getCateGory(){
