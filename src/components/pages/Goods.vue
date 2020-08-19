@@ -62,7 +62,7 @@ import { toMoney } from '@/filter/moneyFilter.js'
     },
     created(){
       // 获取页面跳转的路由传递的参数
-      this.goodsId = this.$route.query.goodsId
+      this.goodsId = this.$route.query.goodsId ?  this.$route.query.goodsId :  this.$route.params.goodsId
       console.log(this.GoodsId);
       this.goodsInfo = {
       "mallPrice": 3.90,

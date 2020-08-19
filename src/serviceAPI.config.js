@@ -8,6 +8,7 @@ const URL = {
   geDetailGoodsInfo: LOCALURL + 'goods/geDetailGoodsInfo', // 获取商品详情
   getCategoryList: LOCALURL + 'goods/getCategoryList', // 获取大类信息
   getCategorySubList: LOCALURL + 'goods/getCategorySubList', // 获取子类信息
+  getGoodListByCategorySubList:  LOCALURL + 'goods/getGoodListByCategorySubList', // 获取小类商品的信息
 }
 
 module.exports = URL

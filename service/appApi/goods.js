@@ -66,11 +66,15 @@ router.post('/getCategorySubList', async(ctx) => {
 })
 
 // 根据类别获取商品列表
-router.post('/getGoodListByCategorySubList', async(ctx) => {
+router.get('/getGoodListByCategorySubList', async(ctx) => {
     try{
-        let categorySubId = ctx.request.body.categorySubId; // 获取传进来的id
+        // 后台分页
+        let categoryId = ctx.request.body.categorySubId; // 获取传进来的子类id
+        let page = ctx.request.body.page // 当前页数
+        let num  = 10 // 每页显示的数量
+        let start = (page - 1)*num// 下一页开始的index
         const Goods = mongoose.model('Goods');
-        let result =  await Goods.findOne({SUB_ID: categorySubId}).exec()
+        let result =  await Goods.findOne({SUB_ID: categorySubId}).skip(start).limit(num).exec()
         ctx.body={code: 200, message:result}
      }catch(error){
          ctx.body = {code: 500, message: error}

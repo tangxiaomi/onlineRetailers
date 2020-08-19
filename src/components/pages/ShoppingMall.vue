@@ -39,8 +39,8 @@
           <swiper-slide v-for="(item, index) in recommendGoods" :key="index">
             <div class="recommend-item">
               <img :src="item.image" width="80%">
-              <div>{{item.goodsName}}</div>
-              <div>￥{{item.price | moneyFilter}}(￥{{item.mallPrice | moneyFilter}})</div>
+              <div class="text">{{item.goodsName}}</div>
+              <div class="text">￥{{item.price | moneyFilter}}(￥{{item.mallPrice | moneyFilter}})</div>
             </div>
           </swiper-slide>
         </swiper>
@@ -632,6 +632,7 @@
     padding: .3rem;
     font-size: 12px;
     text-align: center;
+    flex: 1;
   }
   .recommend-area{
     background-color: #fff;
@@ -650,6 +651,9 @@
     width: 99%;
     border-right: 1px solid #eee;
     text-align: center;
+  }
+  .recommend-item .text{
+    font-size: .8rem;
   }
   .hot-area{
     text-align: center;
